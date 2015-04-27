@@ -5,23 +5,27 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
+import com.github.kingaza.aspree.model.TaxonomyModel;
 
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    private static final String TAG = "MainActivity";
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -135,6 +139,23 @@ public class MainActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            final TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+
+            Callback<TaxonomyModel.Taxonomy> taxonomyCallback = new Callback<TaxonomyModel.Taxonomy>() {
+                @Override
+                public void success(TaxonomyModel.Taxonomy taxonomy, Response response) {
+                    textView.setText(taxonomy.toString());
+                    Log.i(TAG, response.toString());
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    textView.setText("Spree access failure: " + error.getMessage());
+                }
+            };
+            TaxonomyModel.getTaxonomy(1, taxonomyCallback);
+
             return rootView;
         }
 

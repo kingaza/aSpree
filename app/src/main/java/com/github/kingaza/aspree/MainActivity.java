@@ -20,7 +20,8 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 import com.github.kingaza.aspree.model.TaxonomyModel;
-
+import com.github.kingaza.aspree.protocol.Taxonomies;
+import com.github.kingaza.aspree.protocol.Taxonomy;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -142,10 +143,14 @@ public class MainActivity extends ActionBarActivity
 
             final TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 
-            Callback<TaxonomyModel.Taxonomy> taxonomyCallback = new Callback<TaxonomyModel.Taxonomy>() {
+            Callback<Taxonomy> taxonomyCallback = new Callback<Taxonomy>() {
                 @Override
-                public void success(TaxonomyModel.Taxonomy taxonomy, Response response) {
-                    textView.setText(taxonomy.toString());
+                public void success(Taxonomy taxonomy, Response response) {
+                    String text = "";
+                    for (String s : taxonomy.getTaxonNames() ) {
+                        text = text + "\n" + s;
+                    }
+                    textView.setText(text);
                     Log.i(TAG, response.toString());
                 }
 
@@ -154,7 +159,28 @@ public class MainActivity extends ActionBarActivity
                     textView.setText("Spree access failure: " + error.getMessage());
                 }
             };
-            TaxonomyModel.getTaxonomy(1, taxonomyCallback);
+            //TaxonomyModel.getTaxonomy(1, taxonomyCallback);
+
+            Callback<Taxonomies> taxonomiesCallback = new Callback<Taxonomies>() {
+                @Override
+                public void success(Taxonomies taxonomies, Response response) {
+                    String text = "";
+                    for (Taxonomy taxonomy : taxonomies.taxonomies) {
+                        text = text + taxonomy.name + "\n";
+                        for (String s : taxonomy.getTaxonNames()) {
+                            text = text + "\t" + s + ", ";
+                        }
+                        text = text + "\n";
+                    }
+                    textView.setText(text);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    textView.setText("Spree access failure: " + error.getMessage());
+                }
+            };
+            TaxonomyModel.getTaxonomies(taxonomiesCallback);
 
             return rootView;
         }

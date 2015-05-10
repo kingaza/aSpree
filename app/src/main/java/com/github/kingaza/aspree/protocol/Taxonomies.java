@@ -6,11 +6,11 @@ package com.github.kingaza.aspree.protocol;
 
 import java.util.List;
 
-public class Taxonomies {
+public class Taxonomies extends Pagination{
 
-    public int count;
-    public int current_page;
-    public int pages;
+//    public int count;
+//    public int current_page;
+//    public int pages;
 
     public List<Taxonomy> taxonomies;
 

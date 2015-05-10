@@ -5,6 +5,7 @@ import java.util.Locale;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Build;
+import android.util.Log;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
@@ -13,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View.OnClickListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -37,6 +37,8 @@ import retrofit.client.Response;
 
 public class TaxonomyFragment extends ListFragment {
 
+    private static String TAG = "TaxonomyFragment";
+
     static class SimpleAdapter extends ArrayAdapter<Item>
             implements PinnedSectionListAdapter {
 
@@ -53,7 +55,7 @@ public class TaxonomyFragment extends ListFragment {
         public void retrieveFromTaxonomy(Taxonomies taxonomies) {
             clear();
             int sectionPosition = 0, listPosition = 0;
-            int sectionsNumber = taxonomies.count;
+            int sectionsNumber = taxonomies.taxonomies.size();
             prepareSections(sectionsNumber);
             for (Taxonomy taxonomy : taxonomies.taxonomies) {
                 Item section = new Item(Item.SECTION, taxonomy.name);
@@ -84,7 +86,6 @@ public class TaxonomyFragment extends ListFragment {
             view.setTag("" + position);
             Item item = getItem(position);
             if (item.type == Item.SECTION) {
-                //view.setOnClickListener(PinnedSectionListActivity.this);
                 view.setBackgroundColor(
                         parent.getResources().getColor(
                                 COLORS[item.sectionPosition % COLORS.length]));
@@ -257,6 +258,7 @@ public class TaxonomyFragment extends ListFragment {
         Callback<Taxonomies> taxonomiesCallback = new Callback<Taxonomies>() {
             @Override
             public void success(Taxonomies taxonomies, Response response) {
+                Log.d(TAG, "Got " + taxonomies.taxonomies.size() + " taxonomies");
                 mTaxonomies = taxonomies;
                 updateView();
             }

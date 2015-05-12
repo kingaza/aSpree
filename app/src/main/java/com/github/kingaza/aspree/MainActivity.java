@@ -61,17 +61,22 @@ public class MainActivity extends ActionBarActivity
         switch (position) {
             case 0:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new TaxonomyFragment())
+                        .replace(R.id.container, new ProductFragment())
                         .commit();
                 break;
             case 1:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new CountryFragment())
+                        .replace(R.id.container, new TaxonomyFragment())
                         .commit();
                 break;
             case 2:
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, new Fragment())
+                        .replace(R.id.container, new CountryFragment())
+                        .commit();
+                break;
+            case 3:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new VariantFragment())
                         .commit();
                 break;
             default:
@@ -91,6 +96,9 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
                 break;
         }
     }

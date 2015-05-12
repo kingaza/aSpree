@@ -180,6 +180,7 @@ public class TaxonomyFragment extends ListFragment {
     private boolean isShadowVisible = true;
 
     private Taxonomies mTaxonomies = new Taxonomies();
+    TextView textView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -199,6 +200,7 @@ public class TaxonomyFragment extends ListFragment {
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_taxonomy, container, false);
+        textView = (TextView) view.findViewById(R.id.textView);
         return view;
     }
 
@@ -265,6 +267,7 @@ public class TaxonomyFragment extends ListFragment {
 
             @Override
             public void failure(RetrofitError error) {
+                textView.setText(error.getMessage());
             }
         };
         TaxonomyModel.getTaxonomies(taxonomiesCallback);

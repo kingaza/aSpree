@@ -1,10 +1,8 @@
 package com.github.kingaza.aspree.model;
 
 import com.github.kingaza.aspree.SpreeConst;
-import com.github.kingaza.aspree.protocol.Country;
 import com.github.kingaza.aspree.protocol.Pagination;
-import com.github.kingaza.aspree.protocol.Taxonomies;
-import com.github.kingaza.aspree.protocol.Taxonomy;
+import com.github.kingaza.aspree.protocol.Product;
 
 import java.util.List;
 
@@ -16,59 +14,58 @@ import retrofit.http.Path;
 import retrofit.http.Query;
 
 /**
- * Created by abu on 2015/5/1.
+ * Created by abu on 2015/5/12.
  */
-public class CountryModel {
+public class ProductModel {
+    public class Products extends Pagination {
+        public List<Product> products;
+    }
 
-    public class Countries extends Pagination {
-        public List<Country> countries;
-    };
-
-    interface ICountry {
+    interface IProduct {
 
         @Headers({
                 "Content-Type: application/json",
                 "Accept: application/json",
                 "X-Spree-Token: " + SpreeConst.SPREE_TOKEN
         })
-        @GET("/countries")
-        void countries(Callback<Countries> callback);
+        @GET("/products")
+        void products(Callback<Products> callback);
 
         @Headers({
                 "Content-Type: application/json",
                 "Accept: application/json",
                 "X-Spree-Token: " + SpreeConst.SPREE_TOKEN
         })
-        @GET("/countries")
-        void countriesInPage(@Query("page") int page, Callback<Countries> callback);
+        @GET("/products")
+        void productsInPage(@Query("page") int page, Callback<Products> callback);
 
         @Headers({
                 "Content-Type: application/json",
                 "Accept: application/json",
                 "X-Spree-Token: " + SpreeConst.SPREE_TOKEN
         })
-        @GET("/countries/{id}")
-        void country(@Path("id") int id, Callback<Country> callback);
+        @GET("/products/{id}")
+        void product(@Path("id") int id, Callback<Product> callback);
     }
 
-    public static void getCountries(Callback<Countries> callback) {
+    public static void getProducts(Callback<Products> callback) {
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(SpreeConst.API_URL).build();
-        ICountry spree = restAdapter.create(ICountry.class);
-        spree.countries(callback);
+        IProduct spree = restAdapter.create(IProduct.class);
+        spree.products(callback);
     }
 
-    public static void getCountriesInPage(int page, Callback<Countries> callback) {
+    public static void getVariantsInPage(int page, Callback<Products> callback) {
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(SpreeConst.API_URL).build();
-        ICountry spree = restAdapter.create(ICountry.class);
-        spree.countriesInPage(page, callback);
+        IProduct spree = restAdapter.create(IProduct.class);
+        spree.productsInPage(page, callback);
     }
 
-    public static void getCountry(int id, Callback<Country> callback) {
+    public static void getCountry(int id, Callback<Product> callback) {
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(SpreeConst.API_URL).build();
-        ICountry spree = restAdapter.create(ICountry.class);
-        spree.country(id, callback);
+        IProduct spree = restAdapter.create(IProduct.class);
+        spree.product(id, callback);
     }
 }

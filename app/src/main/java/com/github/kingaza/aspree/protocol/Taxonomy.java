@@ -12,7 +12,6 @@ public class Taxonomy {
     public int id;
     public String name;
 
-
     public class Root {
         public int id;
         public String name;

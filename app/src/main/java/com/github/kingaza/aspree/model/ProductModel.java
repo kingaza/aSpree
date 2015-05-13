@@ -55,14 +55,14 @@ public class ProductModel {
         spree.products(callback);
     }
 
-    public static void getVariantsInPage(int page, Callback<Products> callback) {
+    public static void getProductsInPage(int page, Callback<Products> callback) {
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(SpreeConst.API_URL).build();
         IProduct spree = restAdapter.create(IProduct.class);
         spree.productsInPage(page, callback);
     }
 
-    public static void getCountry(int id, Callback<Product> callback) {
+    public static void getProduct(int id, Callback<Product> callback) {
 
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(SpreeConst.API_URL).build();
         IProduct spree = restAdapter.create(IProduct.class);

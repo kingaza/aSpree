@@ -63,7 +63,7 @@ public class ProductFragment extends ListFragment {
 
                 if (direction == SwipyRefreshLayoutDirection.BOTTOM &&
                         mPagination.current_page < mPagination.pages) {
-                    ProductModel.getVariantsInPage(mPagination.current_page + 1, mCallback);
+                    ProductModel.getProductsInPage(mPagination.current_page + 1, mCallback);
                 }
 
                 mSwipyRefreshLayout.setRefreshing(false);

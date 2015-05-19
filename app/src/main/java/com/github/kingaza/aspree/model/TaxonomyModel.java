@@ -7,8 +7,8 @@ import retrofit.http.Path;
 import retrofit.http.Headers;
 
 import com.github.kingaza.aspree.SpreeConst;
-import com.github.kingaza.aspree.protocol.Taxonomy;
-import com.github.kingaza.aspree.protocol.Taxonomies;
+import com.github.kingaza.aspree.bean.Taxonomy;
+import com.github.kingaza.aspree.bean.Taxonomies;
 
 /**
  * Created by abu on 2015/4/26.

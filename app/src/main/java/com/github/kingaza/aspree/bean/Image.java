@@ -1,4 +1,4 @@
-package com.github.kingaza.aspree.protocol;
+package com.github.kingaza.aspree.bean;
 
 /**
  * Created by abu on 2015/5/11.

@@ -3,9 +3,8 @@ package com.github.kingaza.aspree.model;
 import java.util.List;
 
 import com.github.kingaza.aspree.SpreeConst;
-import com.github.kingaza.aspree.protocol.Country;
-import com.github.kingaza.aspree.protocol.Pagination;
-import com.github.kingaza.aspree.protocol.Variant;
+import com.github.kingaza.aspree.bean.Pagination;
+import com.github.kingaza.aspree.bean.Variant;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;

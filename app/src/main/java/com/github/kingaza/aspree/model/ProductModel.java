@@ -1,8 +1,8 @@
 package com.github.kingaza.aspree.model;
 
 import com.github.kingaza.aspree.SpreeConst;
-import com.github.kingaza.aspree.protocol.Pagination;
-import com.github.kingaza.aspree.protocol.Product;
+import com.github.kingaza.aspree.bean.Pagination;
+import com.github.kingaza.aspree.bean.Product;
 
 import java.util.List;
 

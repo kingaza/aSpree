@@ -1,15 +1,22 @@
-package com.github.kingaza.aspree.protocol;
+package com.github.kingaza.aspree.bean;
 
 /**
  * Created by abu on 2015/4/28.
  */
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.List;
 import java.util.ArrayList;
 
+@DatabaseTable(tableName = "taxonomy")
 public class Taxonomy {
 
+    @DatabaseField(id = true, generatedId = false)
     public int id;
+
+    @DatabaseField
     public String name;
 
     public class Root {

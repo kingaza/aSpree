@@ -1,4 +1,4 @@
-package com.github.kingaza.aspree.protocol;
+package com.github.kingaza.aspree.bean;
 
 
 import java.util.List;

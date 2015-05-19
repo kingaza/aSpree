@@ -1,7 +1,5 @@
 package com.github.kingaza.aspree;
 
-import java.util.Locale;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Build;
@@ -22,8 +20,8 @@ import android.widget.ArrayAdapter;
 import android.widget.SectionIndexer;
 
 import com.github.kingaza.aspree.model.TaxonomyModel;
-import com.github.kingaza.aspree.protocol.Taxonomies;
-import com.github.kingaza.aspree.protocol.Taxonomy;
+import com.github.kingaza.aspree.bean.Taxonomies;
+import com.github.kingaza.aspree.bean.Taxonomy;
 import com.github.kingaza.aspree.view.PinnedSectionListView;
 import com.github.kingaza.aspree.view.PinnedSectionListView.PinnedSectionListAdapter;
 

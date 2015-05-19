@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.github.kingaza.aspree.model.ProductModel;
-import com.github.kingaza.aspree.protocol.Pagination;
-import com.github.kingaza.aspree.protocol.Product;
+import com.github.kingaza.aspree.bean.Pagination;
+import com.github.kingaza.aspree.bean.Product;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 

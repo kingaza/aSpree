@@ -11,9 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.github.kingaza.aspree.bean.State;
+import com.github.kingaza.aspree.dao.CountryDao;
+import com.github.kingaza.aspree.dao.DBHelper;
+import com.github.kingaza.aspree.dao.StateDao;
 import com.github.kingaza.aspree.model.CountryModel;
-import com.github.kingaza.aspree.protocol.Country;
-import com.github.kingaza.aspree.protocol.Pagination;
+import com.github.kingaza.aspree.bean.Country;
+import com.github.kingaza.aspree.bean.Pagination;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
@@ -37,10 +41,13 @@ public class CountryFragment extends ListFragment {
     Callback<CountryModel.Countries> mCallback = new Callback<CountryModel.Countries>() {
         @Override
         public void success(CountryModel.Countries countries, Response response) {
+
             mPagination = (Pagination) countries;
             Log.i(TAG, "Got page " + mPagination.current_page + "/" + mPagination.pages);
             for (Country country : countries.countries) {
                 mCountryNameList.add(country.name);
+                CountryDao dao = new CountryDao(getActivity());
+                dao.add(country);
             }
             mAdapter.notifyDataSetChanged();
         }

@@ -1,5 +1,6 @@
 package com.github.kingaza.aspree.dao;
 
+import java.util.List;
 import android.content.Context;
 
 import com.github.kingaza.aspree.bean.Country;
@@ -34,5 +35,15 @@ public class CountryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Country> getAll() {
+        List<Country> countries = null;
+        try {
+            countries = countryDaoOpe.queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return countries;
     }
 }

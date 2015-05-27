@@ -31,4 +31,5 @@ dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'com.github.PhilJay:MPAndroidChart:v2.0.9'
     compile 'com.github.orangegangsters:swipy:1.2.0@aar'
+    compile 'jp.wasabeef:richeditor-android:0.0.6@aar'
 }

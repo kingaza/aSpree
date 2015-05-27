@@ -3,9 +3,11 @@ package com.github.kingaza.aspree.dao;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import android.util.Log;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.github.kingaza.aspree.bean.Country;
 import com.github.kingaza.aspree.bean.State;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -17,7 +19,9 @@ import com.j256.ormlite.table.TableUtils;
  */
 public class DBHelper extends OrmLiteSqliteOpenHelper{
 
-    private final static int DATABASE_VERSION = 1;
+    private static String TAG = "DBHelper";
+
+    private final static int DATABASE_VERSION = 2;
     private final static String DATABASE_NAME = "aSpree.db";
 
     private Map<String, Dao> daos = new HashMap<String, Dao>();
@@ -34,6 +38,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper{
             synchronized (DBHelper.class) {
                 if (instance == null) {
                     instance = new DBHelper(context);
+                    Log.i(TAG, "DB Helper created for database " + DATABASE_NAME);
                 }
             }
         }
@@ -44,6 +49,8 @@ public class DBHelper extends OrmLiteSqliteOpenHelper{
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
         try {
             TableUtils.createTable(connectionSource, State.class);
+            TableUtils.createTable(connectionSource, Country.class);
+            Log.i(TAG, "tables created.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,7 +60,9 @@ public class DBHelper extends OrmLiteSqliteOpenHelper{
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             TableUtils.dropTable(connectionSource, State.class, true);
+            TableUtils.dropTable(connectionSource, Country.class, true);
             onCreate(database, connectionSource);
+            Log.i(TAG, "database is updated.");
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -6,13 +6,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+
+import jp.wasabeef.richeditor.RichEditor;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -69,6 +70,11 @@ public class MainActivity extends ActionBarActivity
                         .replace(R.id.container, new VariantFragment())
                         .commit();
                 break;
+            case 4:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new RichEditFragment())
+                        .commit();
+                break;
             default:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
@@ -89,6 +95,9 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 4:
                 mTitle = getString(R.string.title_section4);
+                break;
+            case 5:
+                mTitle = getString(R.string.title_section5);
                 break;
         }
     }
@@ -139,6 +148,7 @@ public class MainActivity extends ActionBarActivity
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        private RichEditor mEditor;
         /**
          * Returns a new instance of this fragment for the given section
          * number.
@@ -158,6 +168,11 @@ public class MainActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            mEditor = (RichEditor) rootView.findViewById(R.id.editor);
+            mEditor.setEditorHeight(200);
+            mEditor.setPlaceholder("Insert text here...");
+
             return rootView;
         }
 

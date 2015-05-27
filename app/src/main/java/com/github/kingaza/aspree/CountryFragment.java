@@ -42,13 +42,15 @@ public class CountryFragment extends ListFragment {
         @Override
         public void success(CountryModel.Countries countries, Response response) {
 
+            CountryDao dao = new CountryDao(getActivity());
             mPagination = (Pagination) countries;
             Log.i(TAG, "Got page " + mPagination.current_page + "/" + mPagination.pages);
             for (Country country : countries.countries) {
                 mCountryNameList.add(country.name);
-                CountryDao dao = new CountryDao(getActivity());
                 dao.add(country);
             }
+            List<Country> list = dao.getAll();
+            Log.i(TAG, "country number: " + list.size());
             mAdapter.notifyDataSetChanged();
         }
 
